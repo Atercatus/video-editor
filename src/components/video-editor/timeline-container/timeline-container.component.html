@@ -1,0 +1,56 @@
+<div
+  style="
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  "
+>
+  <div
+    style="
+      position: relative;
+      width: 1300px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      border-top: 1px solid #dad1d1;
+      border-bottom: 1px solid #dad1d1;
+    "
+    (mouseenter)="onTimelineMouseEnter()"
+    (mouseleave)="onTimelineMouseLeave()"
+    #timelineContainer
+  >
+    <lib-timeline-header [baseCoordinatesX]="baseCoordinates.x" [pixelPerTime]="pixelPerTime"></lib-timeline-header>
+    <lib-thumbnail-rail [baseCoordinatesX]="baseCoordinates.x" [pixelPerTime]="pixelPerTime">
+      <lib-slider-controller
+        [baseCoordinatesX]="baseCoordinates.x"
+        [pixelPerTime]="pixelPerTime"
+        [duration]="duration"
+        (startHandleMove)="onStartHandleMove($event)"
+        (endHandleMove)="onPlayHeadMouseUp()"
+        (requestPlayHeadMove)="onRequestPlayHeadMove($event)"
+      ></lib-slider-controller>
+    </lib-thumbnail-rail>
+
+    <div
+      *ngIf="isCursorVisible"
+      style="position: absolute; width: 1px; height: 100%; background-color: black"
+      [ngStyle]="{left: (cursorPosition$ | async) + 'px'}"
+    ></div>
+
+    <lib-play-head
+      [currentTime]="(currentTime$ | async) ?? 0"
+      [baseCoordinatesX]="baseCoordinates.x"
+      [maxPosition]="timelineContainer.offsetWidth"
+      (updatePosition)="onUpdatePosition($event)"
+      (mouseOver)="onPlayHeadMouseOver()"
+      (mouseOut)="onPlayHeadMouseOut()"
+      (mouseUp)="onPlayHeadMouseUp()"
+      (mouseDown)="onPlayHeadMouseDown()"
+    ></lib-play-head>
+  </div>
+</div>

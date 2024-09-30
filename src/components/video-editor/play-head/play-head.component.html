@@ -1,0 +1,40 @@
+<div
+  *ngIf="
+    getHeadPosition() >= 0 - floor(WIDTH / 2) &&
+    getHeadPosition() <= maxPosition
+  "
+  style="
+    position: absolute;
+    left: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: col-resize;
+    z-index: 999;
+  "
+  [ngStyle]="{
+    left: getHeadPosition() + 'px',
+    width: WIDTH + 'px',
+    top: -floor(WIDTH / 2) + 'px',
+  }"
+  (mousedown)="onMouseDown($event)"
+  (mouseover)="onMouseOver()"
+  (mouseout)="onMouseOut()"
+  s
+  #playHead
+>
+  <div
+    style="
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: blue;
+      z-index: 999;
+    "
+  ></div>
+  <div
+    style="width: 1px; height: 100%; background-color: blue; z-index: 999"
+  ></div>
+</div>

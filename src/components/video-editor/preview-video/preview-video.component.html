@@ -1,0 +1,10 @@
+<div style="width: 100%; display: flex; justify-content: center">
+  <video
+    id="preview-video"
+    controls
+    style="width: 450px; height: 800px"
+    [src]="VIDEO_URL"
+    (timeupdate)="onTimeUpdate()"
+    #previewVideo
+  ></video>
+</div>

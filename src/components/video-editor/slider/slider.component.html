@@ -1,0 +1,49 @@
+<div
+  *ngIf="isDisplayHandle(this.startTime)"
+  style="
+    width: 10px;
+    height: 51px;
+    position: absolute;
+    top: 0;
+    background-color: #ffd600;
+    cursor: col-resize;
+    z-index: 1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  "
+  (mousedown)="onMouseDown($event, 'startTime')"
+  [ngStyle]="{ left: getHeadPosition() + 'px' }"
+  #head
+></div>
+<div
+  style="
+    height: 51px;
+    border-top: 1px solid #ffd600;
+    border-bottom: 1px solid #ffd600;
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 1;
+  "
+  [ngStyle]="getBodyStyle()"
+  #body
+></div>
+<div
+  *ngIf="isDisplayHandle(this.endTime)"
+  style="
+    width: 10px;
+    height: 51px;
+    position: absolute;
+    top: 0;
+    background-color: #ffd600;
+    cursor: col-resize;
+    z-index: 1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  "
+  [ngStyle]="{ left: getTailPosition() + 'px' }"
+  (mousedown)="onMouseDown($event, 'endTime')"
+  #tail
+></div>
